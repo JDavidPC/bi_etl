@@ -36,7 +36,7 @@ Arquitectura principal:
    ```
 3. Salidas principales:
    - `src/output/bi_mx.db`: tabla `listings_analitica` con los datos enriquecidos.
-   - `src/output/datos_limpios.xlsx`: hojas segmentadas (`listings_limpio`, `reviews_analizados`, `calendar_limpio`, etc.) respetando el límite de 1,048,576 filas por hoja.
+   - `src/output/datos_limpios.xlsx`: hojas segmentadas (`listings_limpio`, `reviews_analizados`, `calendar_agregado`) respetando el límite de 1,048,576 filas por hoja, dividiendo automáticamente cuando sea necesario.
    - `logs/log_YYYYMMDD_HHMM.txt`: bitácora completa de la ejecución.
 
 ### Ejemplo de corrida
@@ -45,8 +45,11 @@ PS C:\Users\usuario\bi_etl> C:/Users/usuario/bi_etl/venv/Scripts/python.exe src/
 ...
 [INFO] ✓ Colección 'listings' extraída: 26,401 registros
 [INFO] ✓ Colección 'reviews' extraída: 1,388,226 registros
-[WARNING] ⚠️  'reviews_analizados' excede 1,048,576 filas; se dividirá en 2 hojas.
-[INFO] Éxito: Se guardaron 5 hojas en el archivo 'datos_limpios.xlsx'
+[INFO] ✓ Colección 'calendar' extraída: 9,636,365 registros
+[INFO] Formas - final: (19,286, 75), limpio: (19,286, 71), reviews: (15,000, 8), calendar_agregado: (26,401, 3)
+[INFO] Éxito: 19,286 registros insertados en 'listings_analitica'
+[INFO] Éxito: Se guardaron 3 hojas en el archivo 'datos_limpios.xlsx'
+[INFO] ✅ XLSX 'calendar_agregado' ok (26,401 registros en 1 hojas)
 [INFO] Pipeline ETL finalizado con éxito
 ```
 
