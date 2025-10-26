@@ -55,5 +55,6 @@ Actualiza la tabla con la información real del equipo.
 
 | Integrante | Rol y responsabilidades |
 |------------|-------------------------|
-| _(Nombre)_ | _(Ej.: Diseño de la arquitectura ETL, desarrollo de `main.py`)_ |
-| _(Nombre)_ | _(Ej.: Limpieza y enriquecimiento de datos en `transformacion.py`)_ |
+| Juan David Palacio | exploración de los dataframes, transformación |
+| Sebastian Cuencar | extracción, carga, main |
+| Jaider Santiago Villa | documentación |
