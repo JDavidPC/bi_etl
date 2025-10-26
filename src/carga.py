@@ -22,7 +22,7 @@ class Carga:
         df_final,
         df_limpio,
         df_reviews,
-        df_calendar,
+        df_calendar_agregado,
         logger: Optional[Logs] = None,
         output_dir: Optional[str | Path] = None,
     ) -> None:
@@ -30,7 +30,7 @@ class Carga:
         self.df_final = df_final
         self.df_limpio = df_limpio
         self.df_reviews = df_reviews
-        self.df_calendar = df_calendar
+        self.df_calendar_agregado = df_calendar_agregado
         self.logger = (
             logger.crear_sublogger(header="LOG DE CARGA - AIRBNB CDMX")
             if logger
@@ -49,14 +49,14 @@ class Carga:
 
         self.logger.info("Clase Carga inicializada con los DataFrames a exportar")
         self.logger.info(
-            f"Formas - final: {df_final.shape}, limpio: {df_limpio.shape}, reviews: {df_reviews.shape}, calendar: {df_calendar.shape}"
+            f"Formas - final: {df_final.shape}, limpio: {df_limpio.shape}, reviews: {df_reviews.shape}, calendar_agregado: {df_calendar_agregado.shape}"
         )
         self.logger.info(f"Archivos de salida -> {self.output_dir}")
 
         self._excel_targets = [
             ("listings_limpio", self.df_limpio),
             ("reviews_analizados", self.df_reviews),
-            ("calendar_limpio", self.df_calendar),
+            ("calendar_agregado", self.df_calendar_agregado),
         ]
         self._expected_rows = {name: len(frame) for name, frame in self._excel_targets}
         self._excel_registry: dict[str, list[tuple[str, int]]] = {}

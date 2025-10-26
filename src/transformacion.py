@@ -35,10 +35,10 @@ class Transformacion:
             if logger
             else Logs(header="LOG DE TRANSFORMACIÓN - AIRBNB CDMX")
         )
-
         self.df_limpio: Optional[pd.DataFrame] = None
         self.df_reviews_analizado: Optional[pd.DataFrame] = None
         self.df_calendar_limpio: Optional[pd.DataFrame] = None
+        self.df_calendar_agregado: Optional[pd.DataFrame] = None
         self.df_final: Optional[pd.DataFrame] = None
 
         DetectorFactory.seed = 0
@@ -310,6 +310,9 @@ class Transformacion:
         calendar_agg.rename(columns={"listing_id": "id"}, inplace=True)
         self.logger.info(f"Agregación de calendar con forma {calendar_agg.shape}")
 
+        # Guardar versión agregada para exportes posteriores evitando volúmenes masivos
+        self.df_calendar_agregado = calendar_agg.copy()
+
         df_final = self.df_limpio.merge(sentiment_agg, on="id", how="left")
         df_final = df_final.merge(calendar_agg, on="id", how="left")
 
@@ -351,7 +354,7 @@ class Transformacion:
             for obj in (
                 self.df_limpio,
                 self.df_reviews_analizado,
-                self.df_calendar_limpio,
+                self.df_calendar_agregado,
                 self.df_final,
             )
         ):
@@ -359,6 +362,6 @@ class Transformacion:
         return (
             self.df_limpio.copy(),
             self.df_reviews_analizado.copy(),
-            self.df_calendar_limpio.copy(),
+            self.df_calendar_agregado.copy(),
             self.df_final.copy(),
         )

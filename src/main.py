@@ -23,13 +23,13 @@ def run_pipeline() -> None:
             logger=logger,
         )
         df_final = transformador.ejecutar_transformacion_completa()
-        df_limpio, df_reviews_proc, df_calendar_proc, _ = transformador.obtener_resultados()
+        df_limpio, df_reviews_proc, df_calendar_agg, _ = transformador.obtener_resultados()
 
         cargador = Carga(
             df_final=df_final,
             df_limpio=df_limpio,
             df_reviews=df_reviews_proc,
-            df_calendar=df_calendar_proc,
+            df_calendar_agregado=df_calendar_agg,
             logger=logger,
         )
         cargador.ejecutar_carga_completa()
