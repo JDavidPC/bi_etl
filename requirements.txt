@@ -1,0 +1,14 @@
+pandas
+pymongo
+numpy
+matplotlib
+seaborn
+sqlalchemy
+openpyxl
+plotly
+scikit-learn
+ipython
+ipykernel
+nltk
+langdetect
+textblob
