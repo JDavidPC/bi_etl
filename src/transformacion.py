@@ -163,6 +163,14 @@ class Transformacion:
             elif pd.api.types.is_bool_dtype(df["has_availability"]):
                 df["has_availability"] = df["has_availability"].astype(int)
 
+        # Normalizar host_is_superhost a binario (1=superhost, 0=no superhost)
+        if "host_is_superhost" in df.columns:
+            df["host_is_superhost"].fillna("f", inplace=True)
+            if df["host_is_superhost"].dtype == "object":
+                df["host_is_superhost"] = df["host_is_superhost"].apply(lambda x: 1 if x == "t" else 0)
+            elif pd.api.types.is_bool_dtype(df["host_is_superhost"]):
+                df["host_is_superhost"] = df["host_is_superhost"].astype(int)
+
         # Limpieza de neighbourhood
         if "neighbourhood" in df.columns:
             df["neighbourhood_cleaned"] = (
@@ -207,7 +215,6 @@ class Transformacion:
             "host_response_time",
             "host_response_rate",
             "host_acceptance_rate",
-            "host_is_superhost",
             "host_thumbnail_url",
             "host_picture_url",
             "host_listings_count",
